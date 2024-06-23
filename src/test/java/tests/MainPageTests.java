@@ -1,11 +1,14 @@
 package tests;
 
 import components.SubmitRequestComponent;
+import extensions.io.qameta.allure.Manual;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
+
+import static io.qameta.allure.Allure.step;
 
 @Tag("smoke_tests")
 @Feature("hflabs.ru")
@@ -61,5 +64,26 @@ public class MainPageTests extends TestBase {
         mainPage.openPage()
                 .openCompanyTopBar()
                 .checkCompanyTopBarTextsAndLinks();
+    }
+
+    @Test
+    @Manual
+    @Tag("desktop")
+    @DisplayName("Check the customer stories block in the desktop view")
+    void customerStoriesInDesktopViewTest() {
+        step("Open the main page");
+        step("Check the customer stories block", () -> {
+                    step("The block has a title");
+                    step("The block displays 3 items at a time");
+                    step("Check the 1st item: it contains a customer's logo, a year, and some text");
+                    step("The block displays the scroll left button and the scroll right button");
+                }
+        );
+        step("Use the scroll buttons", () -> {
+                    step("Click the scroll left button to make the 1st item move the 2nd position");
+                    step("Click the scroll right button to make the 1st item move the 1nd position");
+                    step("Click the scroll right button again to make the 1st item disappear");
+                }
+        );
     }
 }
